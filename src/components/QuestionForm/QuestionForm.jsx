@@ -6,18 +6,15 @@ import Select from '../UI/Select';
 import Button from '../UI/Button';
 import useQuestionForm from '../hooks/useQuestionForm.js';
 
-const QuestionForm = () => {
-  const {
-    question,
-    handleInputChange,
-    handleTypeChange,
-    handleOptionAdd,
-    handleOptionRemove,
-    handleOptionEdit,
-    handleNestedQuestionAdd,
-    handleNestedQuestionRemove
-  } = useQuestionForm();
-  // console.log("question : ", question)
+const QuestionForm = ({
+  question,
+  handleInputChange,
+  handleTypeChange,
+  handleOptionAdd,
+  handleOptionRemove,
+  handleOptionEdit,
+}) => {
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Questions</h2>
@@ -25,9 +22,10 @@ const QuestionForm = () => {
       <div>
         <div className="mb-4">
           <Input
+            id={question.id}
             label="1."
             value={question.questionText}
-            onChange={(e) => handleInputChange("1","questionText", e.target.value)}
+            onChange={(e) => handleInputChange(question.id, "questionText", e.target.value)}
             placeholder="Enter your question"
           />
         </div>
@@ -36,7 +34,7 @@ const QuestionForm = () => {
             label="Question Type"
             value={question.questionType}
             onChange={handleTypeChange}
-            id="1"
+            id={question.id}
             options={[
               { value: 'dropdown', label: 'Drop Down' },
               { value: 'radio', label: 'Radio Button' },
@@ -47,9 +45,10 @@ const QuestionForm = () => {
         </div>
         {['text', 'number'].includes(question.questionType) && (
           <Input
+            id={question.id}
             label="Answer : "
             value={question.answer}
-            onChange={(e) => handleInputChange("1",'answer', e.target.value)}
+            onChange={(e) => handleInputChange(question.id, 'answer', e.target.value)}
             placeholder="Enter your answer"
           />
         )
@@ -58,26 +57,27 @@ const QuestionForm = () => {
 
         {['radio', 'dropdown'].includes(question.questionType) && (
           <QuestionOptions
+            id={question.id}
             options={question.options}
             onAdd={handleOptionAdd}
             onRemove={handleOptionRemove}
             onEdit={handleOptionEdit}
-            optionsHierarchy={0}
           />
         )}
         <div className="mt-4 flex items-center space-x-4">
           {['radio', 'dropdown'].includes(question.questionType) && (
             <label className="inline-flex items-center">
               <input
+                id={question.id}
                 type="checkbox"
                 checked={question.isLinked}
-                onChange={(e) => handleInputChange('1','isLinked', e.target.checked)}
+                onChange={(e) => handleInputChange(question.id, 'isLinked', e.target.checked)}
                 className="form-checkbox h-5 w-5 text-green-600"
               />
               <span className="ml-2 text-gray-700">Linked Question</span>
             </label>
           )}
-          <label className="inline-flex items-center">
+          {question.isRecurring&&<label className="inline-flex items-center">
             <input
               type="checkbox"
               checked={question.isRecurring}
@@ -85,8 +85,8 @@ const QuestionForm = () => {
               className="form-checkbox h-5 w-5 text-green-600"
             />
             <span className="ml-2 text-gray-700">Recurring Question</span>
-          </label>
-          <label className="inline-flex items-center">
+          </label>}
+          {question.isTimebound&&<label className="inline-flex items-center">
             <input
               type="checkbox"
               checked={question.isTimebound}
@@ -94,20 +94,30 @@ const QuestionForm = () => {
               className="form-checkbox h-5 w-5 text-green-600"
             />
             <span className="ml-2 text-gray-700">Time Bound Question</span>
+          </label>}
+         <label className="inline-flex items-center">
+            <input
+              type="checkbox"
+              checked={question.isDefault}
+              onChange={(e) => handleInputChange('isDefault', e.target.checked)}
+              className="form-checkbox h-5 w-5 text-green-600"
+            />
+            <span className="ml-2 text-gray-700">Only Default</span>
           </label>
+          
         </div>
         {question.isLinked && (
           <NestedQuestions
-             options={question.options}
-            onAdd={handleOptionAdd}
-            onRemove={handleOptionRemove}
-            onEdit={handleOptionEdit}
-            optionsHierarchy={0}
-            // onAdd={handleNestedQuestionAdd}
-            // onRemove={handleNestedQuestionRemove}
+            options={question.options}
+            question={question}
+            handleInputChange={handleInputChange}
+            handleTypeChange={handleTypeChange}
+            handleOptionAdd={handleOptionAdd}
+            handleOptionRemove={handleOptionRemove}
+            handleOptionEdit={handleOptionEdit}
           />
         )}
-        
+
 
       </div>
 
