@@ -21,7 +21,7 @@ const QuestionComponent = ({ onSave, onDelete, defaultQuestion }) => {
 
   useEffect(() => {
     questionInitialization(defaultQuestion);
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDisplayQuestion = () => {
     setDisplayQuestion(!displayQuestion);
