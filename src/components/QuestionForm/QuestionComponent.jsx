@@ -4,7 +4,6 @@ import Button from "../UI/Button";
 import QuestionForm from "./QuestionForm";
 import delete_icon from "../../assets/delete_icon.png";
 import edit_icon from "../../assets/edit_icon.png";
-import add_icon from "../../assets/add_icon.png";
 import frame_icon from "../../assets/frame_icon.png";
 import '../../App.css'; 
 

@@ -1,6 +1,5 @@
 import React, { memo } from 'react'; 
 import Input from '../UI/Input';
-import Button from '../UI/Button';
 import cancel_icon from '../../assets/cancel_icon.png';
 import add_icon from '../../assets/add_icon.png';
 import '../../App.css';
@@ -21,6 +20,7 @@ const QuestionOptions = memo(({ id, options, onAdd, onRemove, onEdit, type }) =>
 
               <Input
                 value={option.optionText}
+                placeholder={`Enter Option`}
                 onChange={(e) => onEdit(`${id}${index}`, index, e.target.value)}
                 className="question-option-input"
               />
