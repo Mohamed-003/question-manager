@@ -4,10 +4,11 @@ const Select = ({ label, options, ...props }) => {
 
   return (
     <div className="mb-4">
-      {label && <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
-      <select
+      {label && <label style={{marginBottom: "0.5rem"}} >{label}</label>}
+      <div style={{backgroundColor: "rgb(247, 247, 247)",display: "flex",justifyContent: "center",padding: "0.5rem", fontWeight:"500",marginTop: "1rem"}}>
+        <select
+        style={{backgroundColor: "rgb(247, 247, 247)"}}
         id={props.id}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
         onChange={(e) => props.onChange(props.id, e.target.value)}
       >
         {options.map((option) => (
@@ -16,6 +17,8 @@ const Select = ({ label, options, ...props }) => {
           </option>
         ))}
       </select>
+      </div>
+      
     </div>
   );
 };

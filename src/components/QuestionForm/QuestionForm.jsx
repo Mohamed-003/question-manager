@@ -16,45 +16,95 @@ const QuestionForm = ({
 }) => {
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Questions</h2>
+    <div style={{ width: "100%" }} >
 
       <div>
-        <div className="mb-4">
+        <div style={{ padding: "1rem", backgroundColor: "#f7f7f7", marginBottom: "1rem", fontWeight: "500" }}>
           <Input
             id={question.id}
             label="1."
             value={question.questionText}
             onChange={(e) => handleInputChange(question.id, "questionText", e.target.value)}
             placeholder="Enter your question"
+            style={{ backgroundColor: "#f7f7f7 !important" }}
           />
         </div>
-        <div className="mb-4">
-          <Select
-            label="Question Type"
-            value={question.questionType}
-            onChange={handleTypeChange}
-            id={question.id}
-            options={[
-              { value: 'dropdown', label: 'Drop Down' },
-              { value: 'radio', label: 'Radio Button' },
-              { value: 'text', label: 'Text' },
-              { value: 'number', label: 'Number' },
-            ]}
-          />
+
+
+
+        <div className="mt-4 flex items-center space-x-4" style={{gap:"1rem"}}>
+          <div style={{ display: "flex", flexDirection: "column", width: "15rem"}}>
+            <Select
+              label="Question Type"
+              value={question.questionType}
+              onChange={handleTypeChange}
+              id={question.id}
+              options={[
+                { value: 'dropdown', label: 'Drop Down' },
+                { value: 'radio', label: 'Radio Button' },
+                { value: 'text', label: 'Text' },
+                { value: 'number', label: 'Number' },
+              ]}
+            />
+          </div>
+         
+          {['radio', 'dropdown'].includes(question.questionType) && (
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <label class="switch">
+
+                <input type="checkbox" checked={question.isLinked} onChange={(e) => handleInputChange(question.id, 'isLinked', e.target.checked)} />
+                <span class="slider"></span>
+              </label>
+              <p style={{ color: "#02963a" }}> Linked Questions</p>
+            </div>
+
+          )}
+
+          {
+            question.isRecurring &&
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <label class="switch">
+
+                <input type="checkbox" checked={question.isRecurring} onChange={(e) => handleInputChange('isRecurring', e.target.checked)} />
+                <span class="slider"></span>
+              </label>
+              <p style={{ color: "#02963a" }}> Recurring Question</p>
+            </div>
+          }
+
+          {
+            question.isTimebound &&
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <label class="switch">
+
+                <input type="checkbox" checked={question.isTimebound} onChange={(e) => handleInputChange('isTimeBound', e.target.checked)} />
+                <span class="slider"></span>
+              </label>
+              <p style={{ color: "#02963a" }}> Time Bound Question</p>
+            </div>
+          }
+
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <label class="switch">
+
+              <input type="checkbox" checked={question.isDefault} onChange={(e) => handleInputChange('isDefault', e.target.checked)} />
+              <span class="slider"></span>
+            </label>
+            <p style={{ color: "#02963a" }}> Only Default</p>
+          </div>
+
         </div>
-        {['text', 'number'].includes(question.questionType) && (
-          <Input
-            id={question.id}
-            label="Answer : "
-            value={question.answer}
-            onChange={(e) => handleInputChange(question.id, 'answer', e.target.value)}
-            placeholder="Enter your answer"
-          />
-        )
+         {['text', 'number'].includes(question.questionType) && (
+            <Input
+              id={question.id}
+             
+              value={question.answer}
+              onChange={(e) => handleInputChange(question.id, 'answer', e.target.value)}
+              placeholder="Enter your answer"
+              style={{padding: "0.6rem 1rem", backgroundColor: "rgb(247, 247, 247) !important"}}
+            />
 
-        }
-
+          )}
         {['radio', 'dropdown'].includes(question.questionType) && (
           <QuestionOptions
             id={question.id}
@@ -62,50 +112,9 @@ const QuestionForm = ({
             onAdd={handleOptionAdd}
             onRemove={handleOptionRemove}
             onEdit={handleOptionEdit}
+            type={question.questionType}
           />
         )}
-        <div className="mt-4 flex items-center space-x-4">
-          {['radio', 'dropdown'].includes(question.questionType) && (
-            <label className="inline-flex items-center">
-              <input
-                id={question.id}
-                type="checkbox"
-                checked={question.isLinked}
-                onChange={(e) => handleInputChange(question.id, 'isLinked', e.target.checked)}
-                className="form-checkbox h-5 w-5 text-green-600"
-              />
-              <span className="ml-2 text-gray-700">Linked Question</span>
-            </label>
-          )}
-          {question.isRecurring&&<label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              checked={question.isRecurring}
-              onChange={(e) => handleInputChange('isRecurring', e.target.checked)}
-              className="form-checkbox h-5 w-5 text-green-600"
-            />
-            <span className="ml-2 text-gray-700">Recurring Question</span>
-          </label>}
-          {question.isTimebound&&<label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              checked={question.isTimebound}
-              onChange={(e) => handleInputChange('isTimeBound', e.target.checked)}
-              className="form-checkbox h-5 w-5 text-green-600"
-            />
-            <span className="ml-2 text-gray-700">Time Bound Question</span>
-          </label>}
-         <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              checked={question.isDefault}
-              onChange={(e) => handleInputChange('isDefault', e.target.checked)}
-              className="form-checkbox h-5 w-5 text-green-600"
-            />
-            <span className="ml-2 text-gray-700">Only Default</span>
-          </label>
-          
-        </div>
         {question.isLinked && (
           <NestedQuestions
             options={question.options}

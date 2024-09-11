@@ -2,11 +2,12 @@ import React from 'react';
 
 const Input = ({ label, ...props }) => {
   return (
-    <div className="mb-4">
-      {label && <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
+    <div  style={{display: "flex",alignItems: "center"}}>
+      {label && <label style={{width: "1rem"}} >{label}</label>}
       <input
+        style={{display: "flex",alignItems: "center", backgroundColor: "rgb(247, 247, 247)"}}
         {...props}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+        
       />
     </div>
   );

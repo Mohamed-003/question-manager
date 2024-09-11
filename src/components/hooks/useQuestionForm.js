@@ -10,14 +10,13 @@ const useQuestionForm = () => {
       "isRecurring": false,
       "isTimebound": false,
       "isDefault": false,
-      "options": [
-
-      ],
-
+      "options": []
     });
 
-  console.log("question : ", question)
 
+  const questionInitialization = (question) => {
+    setQuestion(question)
+  };
 
   const handleInputChange = (id, field, value) => {
     const updatedObj = handleNestedOperation(String(id), { "type": "question-edit", "value": value, "field": field });
@@ -143,6 +142,7 @@ const useQuestionForm = () => {
     handleOptionAdd,
     handleOptionRemove,
     handleOptionEdit,
+    questionInitialization
   };
 };
 

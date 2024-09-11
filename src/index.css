@@ -1,13 +1,63 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.switch {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  /* Further reduced width */
+  height: 1.2em;
+  /* Further reduced height */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border: 1px solid #adb5bd;
+  transition: .4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 0.8em;
+  /* Further reduced toggle size */
+  width: 0.8em;
+  /* Further reduced toggle size */
+  border-radius: 20px;
+      left: 0.1em;
+        bottom: 0.15em;
+  background-color: #02963a;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #fff;
+  border: 1px solid #acdbbe;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #acdbbe;
+}
+
+input:checked+.slider:before {
+  transform: translateX(0.9em);
+  /* Adjusted for the smaller size */
+  background-color: #02963a;
 }
