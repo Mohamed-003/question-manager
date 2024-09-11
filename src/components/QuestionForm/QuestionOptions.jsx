@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react'; 
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import cancel_icon from '../../assets/cancel_icon.png';
 import add_icon from '../../assets/add_icon.png';
-import '../../App.css'; 
+import '../../App.css';
 
-const QuestionOptions = ({ id, options, onAdd, onRemove, onEdit, type }) => {
+const QuestionOptions = memo(({ id, options, onAdd, onRemove, onEdit, type }) => {
   return (
     <div className="question-options-container">
       {Boolean(type) && (
@@ -34,6 +34,6 @@ const QuestionOptions = ({ id, options, onAdd, onRemove, onEdit, type }) => {
       )}
     </div>
   );
-};
+});
 
 export default QuestionOptions;

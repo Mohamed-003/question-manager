@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react'; 
 import QuestionOptions from './QuestionOptions';
 import NestedQuestions from './NestedQuestions';
 import Input from '../UI/Input';
@@ -7,7 +7,7 @@ import Button from '../UI/Button';
 import useQuestionForm from '../hooks/useQuestionForm.js';
 import '../../App.css'; 
 
-const QuestionForm = ({
+const QuestionForm = memo(({
   question,
   handleInputChange,
   handleTypeChange,
@@ -58,7 +58,7 @@ const QuestionForm = ({
           {question.hasOwnProperty("isRecurring") && (
             <div className="recurring-question-switch">
               <label className="switch">
-                <input type="checkbox" checked={question.isRecurring} onChange={(e) => handleInputChange('isRecurring', e.target.checked)} />
+                <input type="checkbox" checked={question.isRecurring} onChange={(e) => handleInputChange(question.id,'isRecurring', e.target.checked)} />
                 <span className="slider"></span>
               </label>
               <p className="recurring-question-text">Recurring Question</p>
@@ -68,7 +68,7 @@ const QuestionForm = ({
           {question.hasOwnProperty("isTimebound") && (
             <div className="timebound-question-switch">
               <label className="switch">
-                <input type="checkbox" checked={question.isTimebound} onChange={(e) => handleInputChange('isTimeBound', e.target.checked)} />
+                <input type="checkbox" checked={question.isTimebound} onChange={(e) => handleInputChange(question.id,'isTimebound', e.target.checked)} />
                 <span className="slider"></span>
               </label>
               <p className="timebound-question-text">Time Bound Question</p>
@@ -111,6 +111,6 @@ const QuestionForm = ({
       </div>
     </div>
   );
-};
+});
 
 export default QuestionForm;

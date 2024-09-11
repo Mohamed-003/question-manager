@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState,memo } from "react";
 import QuestionComponent from "./QuestionComponent";
 import add_icon from "../../assets/add_icon.png";
 import '../../App.css'; 
 
-const QuestionLists = () => {
+const QuestionLists = memo(() => {
   const [questions, setQuestions] = useState([]);
 
   const handleOnSave = (question) => {
@@ -50,6 +50,6 @@ const QuestionLists = () => {
       </button>
     </div>
   );
-};
+});
 
 export default QuestionLists;

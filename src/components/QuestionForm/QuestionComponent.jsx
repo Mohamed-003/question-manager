@@ -58,7 +58,7 @@ const QuestionComponent = ({ onSave, onDelete, defaultQuestion }) => {
             handleOptionEdit={handleOptionEdit}
           />
           <div className="question-buttons">
-            <Button className="save-btn" onClick={() => onSave(question)}>
+            <Button className="save-btn" onClick={() => {onSave(question); handleDisplayQuestion()}}>
               Save
             </Button>
             <Button className="cancel-btn" onClick={handleDisplayQuestion}>
