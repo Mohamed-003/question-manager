@@ -14,6 +14,7 @@ const QuestionForm = ({
   handleOptionRemove,
   handleOptionEdit,
 }) => {
+  
 
   return (
     <div style={{ width: "100%" }} >
@@ -26,7 +27,7 @@ const QuestionForm = ({
             value={question.questionText}
             onChange={(e) => handleInputChange(question.id, "questionText", e.target.value)}
             placeholder="Enter your question"
-            style={{ backgroundColor: "#f7f7f7 !important" }}
+            style={{ backgroundColor: "#f7f7f7 !important",width:"100%" }}
           />
         </div>
 
@@ -49,7 +50,7 @@ const QuestionForm = ({
           </div>
          
           {['radio', 'dropdown'].includes(question.questionType) && (
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem",marginTop: "1.5rem" }}>
               <label class="switch">
 
                 <input type="checkbox" checked={question.isLinked} onChange={(e) => handleInputChange(question.id, 'isLinked', e.target.checked)} />
@@ -61,8 +62,8 @@ const QuestionForm = ({
           )}
 
           {
-            question.isRecurring &&
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            question.hasOwnProperty("isRecurring") &&
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem",marginTop: "1.5rem" }}>
               <label class="switch">
 
                 <input type="checkbox" checked={question.isRecurring} onChange={(e) => handleInputChange('isRecurring', e.target.checked)} />
@@ -71,10 +72,9 @@ const QuestionForm = ({
               <p style={{ color: "#02963a" }}> Recurring Question</p>
             </div>
           }
-
           {
-            question.isTimebound &&
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            question.hasOwnProperty("isTimebound") &&
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem",marginTop: "1.5rem" }}>
               <label class="switch">
 
                 <input type="checkbox" checked={question.isTimebound} onChange={(e) => handleInputChange('isTimeBound', e.target.checked)} />
@@ -84,14 +84,7 @@ const QuestionForm = ({
             </div>
           }
 
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <label class="switch">
-
-              <input type="checkbox" checked={question.isDefault} onChange={(e) => handleInputChange('isDefault', e.target.checked)} />
-              <span class="slider"></span>
-            </label>
-            <p style={{ color: "#02963a" }}> Only Default</p>
-          </div>
+          
 
         </div>
          {['text', 'number'].includes(question.questionType) && (
@@ -101,7 +94,7 @@ const QuestionForm = ({
               value={question.answer}
               onChange={(e) => handleInputChange(question.id, 'answer', e.target.value)}
               placeholder="Enter your answer"
-              style={{padding: "0.6rem 1rem", backgroundColor: "rgb(247, 247, 247) !important"}}
+              style={{padding: "0.6rem 1rem", backgroundColor: "rgb(247, 247, 247) !important", backgroundColor: "rgb(247, 247, 247)",marginBottom: "1rem"}}
             />
 
           )}

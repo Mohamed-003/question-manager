@@ -34,7 +34,7 @@ const QuestionComponent = ({ onSave, onDelete, defaultQuestion }) => {
     <div >
       {displayQuestion ?
         (
-          <div className="d-flex align-items-center" style={{ display: "flex", justifyContent: "space-between",width:"90%", padding: "1rem", backgroundColor:"#f7f7f7" }}>
+          <div className="d-flex align-items-center" style={{ display: "flex", justifyContent: "space-between",width:"90%", padding: "1rem", backgroundColor:"#f7f7f7",marginBottom:"1rem" }}>
             <div style={{ display: "flex", gap: "1rem" }}><img src={frame_icon} alt="frame_icon"   />
             <div className="font-work-sans text-lg font-normal leading-5 text-left" style={{fontSize: "16px",fontWeight: "500"}}>{`${question.questionId}.  ${question.questionText}`}</div>
             </div>
