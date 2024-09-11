@@ -1,14 +1,11 @@
 import React from 'react';
+import '../../App.css'; // Assuming the CSS file is in the same directory
 
 const Input = ({ label, ...props }) => {
   return (
-    <div  style={{display: "flex",alignItems: "center"}}>
-      {label && <label style={{width: "1rem"}} >{label}</label>}
-      <input
-        style={{display: "flex",alignItems: "center", backgroundColor: "rgb(247, 247, 247)"}}
-        {...props}
-        
-      />
+    <div className="input-wrapper">
+      {label && <label className="input-label">{label}</label>}
+      <input className="input-field" {...props} />
     </div>
   );
 };

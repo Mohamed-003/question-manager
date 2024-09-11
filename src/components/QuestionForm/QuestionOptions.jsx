@@ -3,37 +3,35 @@ import Input from '../UI/Input';
 import Button from '../UI/Button';
 import cancel_icon from '../../assets/cancel_icon.png';
 import add_icon from '../../assets/add_icon.png';
+import '../../App.css'; 
 
-const QuestionOptions = ({ id, options, onAdd, onRemove, onEdit,type }) => {
+const QuestionOptions = ({ id, options, onAdd, onRemove, onEdit, type }) => {
   return (
-    <div className="mt-4 ">
-      {Boolean(type) && <div style={{ display: 'flex',  gap: '1rem', flexWrap: 'wrap' }}>
-        {options.map((option, index) => (
-          <div key={index} style={{    backgroundColor: "rgb(247, 247, 247)",padding: "0.7rem"}}  >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <p>{`Option ${index + 1}`}</p>
-              <div style={{ padding: '5px' }} onClick={() => onRemove(id, index)} >
-              <img src={cancel_icon} alt="cancel" style={{cursor:"pointer"}} />
-            </div>
-            </div>
-            
-            <Input
-              value={option.optionText}
-              onChange={(e) => onEdit(`${id}${index}`, index, e.target.value)}
-              className="mr-2"
-              style={{ backgroundColor: "#f7f7f7 !important",paddingTop: "0.5rem", cursor: "pointer" }}
-            />
-            
-          </div>
-          
-        ))}
-        <div style={{ padding: "1rem", display: 'flex', alignItems: 'center', gap: '1rem',    width: "10rem" }} onClick={() => onAdd(id)} >
-        Add Option<img src={add_icon} alt="Logo" />
-      </div>
-      </div>}
-      
-      
+    <div className="question-options-container">
+      {Boolean(type) && (
+        <div className="question-options-list">
+          {options.map((option, index) => (
+            <div key={index} className="question-option-item">
+              <div className="question-option-header">
+                <p>{`Option ${index + 1}`}</p>
+                <div className="question-option-remove" onClick={() => onRemove(id, index)}>
+                  <img src={cancel_icon} alt="cancel" className="question-option-cancel-icon" />
+                </div>
+              </div>
 
+              <Input
+                value={option.optionText}
+                onChange={(e) => onEdit(`${id}${index}`, index, e.target.value)}
+                className="question-option-input"
+              />
+            </div>
+          ))}
+          <div className="question-option-add" onClick={() => onAdd(id)}>
+            Add Option
+            <img src={add_icon} alt="Add Option" className="question-option-add-icon" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

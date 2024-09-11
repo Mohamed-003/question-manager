@@ -5,6 +5,7 @@ import Input from '../UI/Input';
 import Select from '../UI/Select';
 import Button from '../UI/Button';
 import useQuestionForm from '../hooks/useQuestionForm.js';
+import '../../App.css'; 
 
 const QuestionForm = ({
   question,
@@ -14,27 +15,22 @@ const QuestionForm = ({
   handleOptionRemove,
   handleOptionEdit,
 }) => {
-  
-
   return (
-    <div style={{ width: "100%" }} >
-
-      <div>
-        <div style={{ padding: "1rem", backgroundColor: "#f7f7f7", marginBottom: "1rem", fontWeight: "500" }}>
+    <div className="question-form-container">
+      <div className='question-form-wrapper'>
+        <div className="question-input-container">
           <Input
             id={question.id}
             label="1."
             value={question.questionText}
             onChange={(e) => handleInputChange(question.id, "questionText", e.target.value)}
             placeholder="Enter your question"
-            style={{ backgroundColor: "#f7f7f7 !important",width:"100%" }}
+            className="question-input"
           />
         </div>
 
-
-
-        <div className="mt-4 flex items-center space-x-4" style={{gap:"1rem"}}>
-          <div style={{ display: "flex", flexDirection: "column", width: "15rem"}}>
+        <div className="question-form-actions">
+          <div className="question-type-select">
             <Select
               label="Question Type"
               value={question.questionType}
@@ -48,56 +44,48 @@ const QuestionForm = ({
               ]}
             />
           </div>
-         
+
           {['radio', 'dropdown'].includes(question.questionType) && (
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem",marginTop: "1.5rem" }}>
-              <label class="switch">
-
+            <div className="linked-questions-switch">
+              <label className="switch">
                 <input type="checkbox" checked={question.isLinked} onChange={(e) => handleInputChange(question.id, 'isLinked', e.target.checked)} />
-                <span class="slider"></span>
+                <span className="slider"></span>
               </label>
-              <p style={{ color: "#02963a" }}> Linked Questions</p>
+              <p className="linked-questions-text">Linked Questions</p>
             </div>
-
           )}
 
-          {
-            question.hasOwnProperty("isRecurring") &&
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem",marginTop: "1.5rem" }}>
-              <label class="switch">
-
+          {question.hasOwnProperty("isRecurring") && (
+            <div className="recurring-question-switch">
+              <label className="switch">
                 <input type="checkbox" checked={question.isRecurring} onChange={(e) => handleInputChange('isRecurring', e.target.checked)} />
-                <span class="slider"></span>
+                <span className="slider"></span>
               </label>
-              <p style={{ color: "#02963a" }}> Recurring Question</p>
+              <p className="recurring-question-text">Recurring Question</p>
             </div>
-          }
-          {
-            question.hasOwnProperty("isTimebound") &&
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem",marginTop: "1.5rem" }}>
-              <label class="switch">
-
-                <input type="checkbox" checked={question.isTimebound} onChange={(e) => handleInputChange('isTimeBound', e.target.checked)} />
-                <span class="slider"></span>
-              </label>
-              <p style={{ color: "#02963a" }}> Time Bound Question</p>
-            </div>
-          }
-
-          
-
-        </div>
-         {['text', 'number'].includes(question.questionType) && (
-            <Input
-              id={question.id}
-             
-              value={question.answer}
-              onChange={(e) => handleInputChange(question.id, 'answer', e.target.value)}
-              placeholder="Enter your answer"
-              style={{padding: "0.6rem 1rem", backgroundColor: "rgb(247, 247, 247) !important", backgroundColor: "rgb(247, 247, 247)",marginBottom: "1rem"}}
-            />
-
           )}
+
+          {question.hasOwnProperty("isTimebound") && (
+            <div className="timebound-question-switch">
+              <label className="switch">
+                <input type="checkbox" checked={question.isTimebound} onChange={(e) => handleInputChange('isTimeBound', e.target.checked)} />
+                <span className="slider"></span>
+              </label>
+              <p className="timebound-question-text">Time Bound Question</p>
+            </div>
+          )}
+        </div>
+
+        {['text', 'number'].includes(question.questionType) && (
+          <Input
+            id={question.id}
+            value={question.answer}
+            onChange={(e) => handleInputChange(question.id, 'answer', e.target.value)}
+            placeholder="Enter your answer"
+            className="answer-input"
+          />
+        )}
+
         {['radio', 'dropdown'].includes(question.questionType) && (
           <QuestionOptions
             id={question.id}
@@ -108,6 +96,7 @@ const QuestionForm = ({
             type={question.questionType}
           />
         )}
+
         {question.isLinked && (
           <NestedQuestions
             options={question.options}
@@ -119,11 +108,7 @@ const QuestionForm = ({
             handleOptionEdit={handleOptionEdit}
           />
         )}
-
-
       </div>
-
-
     </div>
   );
 };

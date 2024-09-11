@@ -60,4 +60,63 @@ input:checked+.slider:before {
   transform: translateX(0.9em);
   /* Adjusted for the smaller size */
   background-color: #02963a;
+} 
+
+/* Main container for the form */
+.question-form-container {
+  width: 100%;
+}
+
+/* Input container styling */
+.question-input-container {
+  padding: 1rem;
+  background-color: #f7f7f7;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.question-input {
+  background-color: #f7f7f7 !important;
+  width: 100%;
+}
+
+/* Form action styles for select and switches */
+.question-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.question-type-select {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+}
+
+.linked-questions-switch,
+.recurring-question-switch,
+.timebound-question-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.linked-questions-text {
+  color: #02963a;
+}
+
+.recurring-question-text {
+  color: #02963a;
+}
+
+.timebound-question-text {
+  color: #02963a;
+}
+
+/* Input for text and number answers */
+.answer-input {
+  padding: 0.6rem 1rem;
+  background-color: rgb(247, 247, 247) !important;
+  margin-bottom: 1rem;
 }
